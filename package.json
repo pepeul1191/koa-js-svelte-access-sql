@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-koa": "npx nodemon --ignore public/* --ignore src/* index.js",
-    "dev": "npm run dev-koa"
+    "dev": "npm run dev-koa",
+    "db:new": "npx dbmate -d \"db/migrations\" -e \"DB\" new ",
+    "db:up": "npx dbmate -d \"db/migrations\" -e \"DB\" up",
+    "db:rollback": "npx dbmate -d \"db/migrations\" -e \"DB\" rollback",
+    "db:dump": "npx dbmate -d \"db/migrations\" -e \"DB\" dump "
   },
   "keywords": [],
   "author": "",
@@ -17,7 +21,12 @@
     "koa": "^3.0.1",
     "koa-ejs": "^4.3.0",
     "koa-router": "^14.0.0",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "sqlite3": "^5.1.7",
+    "bootstrap": "^5.3.3",
+    "dbmate": "^2.15.0",
+    "font-awesome": "^4.7.0",
+    "simplemde": "^1.11.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
