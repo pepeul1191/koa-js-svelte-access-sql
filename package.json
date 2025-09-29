@@ -17,16 +17,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "dbmate": "^2.15.0",
     "ejs": "^3.1.10",
+    "font-awesome": "^4.7.0",
     "koa": "^3.0.1",
     "koa-ejs": "^4.3.0",
     "koa-router": "^14.0.0",
     "koa-static": "^5.0.0",
-    "sqlite3": "^5.1.7",
-    "bootstrap": "^5.3.3",
-    "dbmate": "^2.15.0",
-    "font-awesome": "^4.7.0",
-    "simplemde": "^1.11.2"
+    "sequelize": "^6.37.7",
+    "simplemde": "^1.11.2",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
