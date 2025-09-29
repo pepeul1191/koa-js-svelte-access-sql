@@ -11,6 +11,7 @@ app.use(logger);
 
 // Rutas
 router.get('/', ctx => {
+  console.log('XD')
   ctx.body = '¡Hola, Koa con ESM y logging desde middlewares.js!';
 });
 

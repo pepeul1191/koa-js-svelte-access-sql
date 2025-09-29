@@ -4,7 +4,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-koa": "npx nodemon --ignore public/* --ignore src/* --ignore views/* index.js",
+    "dev": "npm run dev-koa"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +15,8 @@
   "dependencies": {
     "koa": "^3.0.1",
     "koa-router": "^14.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
