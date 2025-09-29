@@ -1,3 +1,4 @@
+// application/controllers/common_controller.js
 import Router from 'koa-router';
 
 const router = new Router();

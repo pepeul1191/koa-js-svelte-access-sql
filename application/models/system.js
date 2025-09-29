@@ -1,4 +1,4 @@
-// models/System.js
+// models/system.js
 import { DataTypes } from 'sequelize';
 import sequelize from '../../configs/database.js'; // Asegúrate de importar tu instancia de Sequelize
 
