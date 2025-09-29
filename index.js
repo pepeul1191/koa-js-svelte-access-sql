@@ -4,7 +4,8 @@ import Router from 'koa-router';
 import render from 'koa-ejs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import logger from './configs/middlewares.js'; // Importar el middleware
+import logger from './configs/middlewares.js';
+import bootstrap from './configs/bootstrap.js'; 
 
 const app = new Koa();
 const router = new Router();
@@ -23,12 +24,8 @@ render(app, {
   cache: false, // Desactivar caché en desarrollo
 });
 
-// Rutas
-router.get('/', async(ctx) => {
-  await ctx.render('common/home', { mensaje: '¡Hola, Koa con EJS!' });
-});
-
-app.use(router.routes()).use(router.allowedMethods());
+// Usar el router configurado en bootstrap
+app.use(bootstrap.routes()).use(bootstrap.allowedMethods());
 
 // Iniciar el servidor
 app.listen(3000, () => {
