@@ -4,6 +4,7 @@ import Router from 'koa-router';
 import render from 'koa-ejs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import serve from 'koa-static';
 import logger from './configs/middlewares.js';
 import bootstrap from './configs/bootstrap.js'; 
 
@@ -13,6 +14,9 @@ const router = new Router();
 // Obtener el directorio actual
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Servir archivos estáticos desde la carpeta public
+app.use(serve(path.join(__dirname, 'public')));
 
 // Usar el middleware de logging
 app.use(logger);
