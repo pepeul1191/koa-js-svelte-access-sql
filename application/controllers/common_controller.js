@@ -11,8 +11,15 @@ router.get('/', requireLogin, async (ctx) => {
 
 // Definir otra ruta
 router.get('/sign-in', async (ctx) => {
-  var messages = ""; //ctx.flash(); // Obtener mensajes flash
+  var messages = ""; 
   await ctx.render('/common/sign-in', { messages: messages }); 
+});
+
+router.post('/sign-in', async (ctx) => {
+  ctx.flashError('Debes de llenar los campos');
+  console.log('xddddddddd');
+  ctx.redirect('sign-in');
+  return;
 });
 
 export default router;
