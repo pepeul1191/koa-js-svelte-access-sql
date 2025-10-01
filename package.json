@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-koa": "npx nodemon --ignore public/* --ignore src/* index.js",
+    "dev-koa": "npx nodemon index.js --ignore public/* --ignore src/*",
     "dev": "npm run dev-koa & npm run svelte",
     "svelte": "rollup -c -w",
     "db:new": "npx dbmate -d \"db/migrations\" -e \"DB\" new ",

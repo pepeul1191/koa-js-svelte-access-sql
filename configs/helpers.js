@@ -17,7 +17,7 @@ export const flash = async (ctx, next) => {
   ctx.flashError = (message) => {
     if (!ctx.session.flash) ctx.session.flash = {};
     ctx.session.flash.message = message;
-    ctx.session.flash.color = 'error';
+    ctx.session.flash.color = 'danger';
   };
   
   ctx.flashInfo = (message) => {
