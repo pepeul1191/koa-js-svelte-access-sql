@@ -62,7 +62,7 @@ const notFound = async (ctx, next) => {
 
 export const redirectIfLoggedIn = async (ctx, next) => {
   console.log(ctx.session); // Acceder a la sesión
-  if (ctx.session && ctx.session.user) {
+  if (ctx.session && ctx.session.authenticated) {
     ctx.redirect('/'); // Redirigir a la página principal
   } else {
     await next(); // Continuar con el siguiente middleware
@@ -70,7 +70,7 @@ export const redirectIfLoggedIn = async (ctx, next) => {
 };
 
 export const requireLogin = async (ctx, next) => {
-  if (!ctx.session || !ctx.session.user) {
+  if (!ctx.session || !ctx.session.authenticated) {
     ctx.flashError('Debes iniciar sesión para continuar'); // Usar flash para mensajes
     ctx.redirect('/sign-in'); // Redirigir a la página de inicio de sesión
   } else {

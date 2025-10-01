@@ -1,6 +1,6 @@
 // configs/helpers.js
 
-export const flash = async (ctx, next) => {
+const flash = async (ctx, next) => {
   // Recuperar mensajes flash de la sesión anterior
   ctx.flash = ctx.session.flash || {};
   
@@ -58,7 +58,19 @@ export const flash = async (ctx, next) => {
   
   await next();
 };
+
+const loadEnv = async (ctx, next) => {
+  ctx.state.env = {
+    BASE_URL: process.env.BASE_URL,
+    STATIC_URL: process.env.STATIC_URL, // Only expose non-sensitive data
+    APP_NAME: process.env.APP_NAME,
+    DB_PASS: process.env.DB_PASS,
+    USERNAME: process.env.USERNAME,
+    PASSWORD: process.env.PASSWORD,
+  };
+  await next();
+}
   
 export default {
-  flash,
+  flash, loadEnv, 
 }

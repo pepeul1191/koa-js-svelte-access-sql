@@ -1,6 +1,6 @@
 // application/controllers/common_controller.js
 import Router from 'koa-router';
-import { requireLogin } from '../../configs/middlewares.js';
+import { requireLogin, redirectIfLoggedIn } from '../../configs/middlewares.js';
 
 const router = new Router();
 
@@ -10,15 +10,28 @@ router.get('/', requireLogin, async (ctx) => {
 });
 
 // Definir otra ruta
-router.get('/sign-in', async (ctx) => {
+router.get('/sign-in', redirectIfLoggedIn, async (ctx) => {
   var messages = ""; 
   await ctx.render('/common/sign-in', { messages: messages }); 
 });
 
 router.post('/sign-in', async (ctx) => {
-  ctx.flashError('Debes de llenar los campos');
-  console.log('xddddddddd');
-  ctx.redirect('sign-in');
+  const { username, password } = ctx.request.body;
+  console.log(ctx.request.body);
+  if(process.env.USERNAME === '' || process.env.PASSWORD === ''){
+    ctx.flashError('Ambos campos deben de ester llenos');
+    ctx.redirect('sign-in');
+    return;
+  }
+  else if(process.env.USERNAME === username && process.env.PASSWORD === password){
+    ctx.session.authenticated = true;
+    ctx.flashSuccess('Has iniciado sesión correctamente');
+    ctx.redirect('/');
+    return;
+  }else{
+    ctx.flashError('Usuario y/o contraseña incorrectos');
+    ctx.redirect('sign-in');
+  } 
   return;
 });
 
