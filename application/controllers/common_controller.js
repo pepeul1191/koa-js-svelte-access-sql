@@ -6,7 +6,7 @@ const router = new Router();
 
 // Definir la ruta principal
 router.get('/', requireLogin, async (ctx) => {
-  await ctx.render('common/home', { mensaje: '¡Hola, Koa con EJS y controladores!' });
+  await ctx.render('common/application', { mensaje: '¡Hola, Koa con EJS y controladores!' });
 });
 
 // Definir otra ruta
