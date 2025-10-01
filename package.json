@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-koa": "npx nodemon --ignore public/* --ignore src/* index.js",
-    "dev": "npm run dev-koa",
+    "dev": "npm run dev-koa & npm run svelte",
+    "svelte": "rollup -c -w",
     "db:new": "npx dbmate -d \"db/migrations\" -e \"DB\" new ",
     "db:up": "npx dbmate -d \"db/migrations\" -e \"DB\" up",
     "db:rollback": "npx dbmate -d \"db/migrations\" -e \"DB\" rollback",
@@ -17,6 +18,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "better-sqlite3": "^12.4.1",
     "bootstrap": "^5.3.3",
     "dbmate": "^2.15.0",
     "font-awesome": "^4.7.0",
@@ -27,9 +29,25 @@
     "koa-static": "^5.0.0",
     "sequelize": "^6.37.7",
     "simplemde": "^1.11.2",
-    "sqlite3": "^5.1.7"
+    "debug": "~2.6.9",
+    "dotenv": "^17.2.1",
+    "http-errors": "~1.6.3",
+    "sirv-cli": "^2.0.0",
+    "sqlite3": "^5.1.7",
+    "svelte": "^4.2.18",
+    "svelte-app": "file:",
+    "svelte-routing": "^2.13.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "rollup": "^3.15.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-css-only": "^4.3.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.1.2",
+    "svelte-preprocess": "^6.0.3"
   }
 }
