@@ -35,4 +35,12 @@ router.post('/sign-in', async (ctx) => {
   return;
 });
 
+router.get('/sign-out', async (ctx) => {
+  // Destruir la sesión
+  ctx.flashSuccess('Has cerrado sesión correctamente');
+  ctx.session = null;
+  
+  ctx.redirect('/sign-in');
+});
+
 export default router;
