@@ -12,7 +12,7 @@
 #sidebar {
     max-width: 264px;
     min-width: 264px;
-    background: var(--bs-dark);
+    background: var(--bs-primary);
     transition: all 0.35s ease-in-out;
 }
 
@@ -47,7 +47,7 @@ a.sidebar-link {
     color: #e9ecef;
     position: relative;
     display: block;
-    font-size: 0.875rem;
+    font-size: 1rem;
 }
 
 .sidebar-link[data-bs-toggle="collapse"]::after {

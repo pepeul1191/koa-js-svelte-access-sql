@@ -15,3 +15,9 @@ Instalar depdencias:
     USERNAME=admin
     PASSWORD=123
     PORT=3000
+
+--- 
+
+Fuentes:
+
++ https://github.com/pepeul1191/flask-svelte-chatpgt/tree/master
