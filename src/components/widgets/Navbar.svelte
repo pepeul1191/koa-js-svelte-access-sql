@@ -1,67 +1,51 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
+  import { navigate } from 'svelte-routing';
+  import { dataStore } from '../../stores/session_stores';
+  import { onMount } from 'svelte';
   
-  export let user;
-  
-  function toggleSidebar() {
-    dispatch('toggleSidebar');
+  let session;
+
+  const signOut = (e) => {
+    let name = 'authToken';
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; secure; samesite=strict`;
+    window.location.replace('/user/sign-out');
   }
+
+  onMount(() => {
+    dataStore.subscribe(value => {
+      console.log(value);
+      if(value != null){
+        session = value
+      }
+    })
+  });
 </script>
 
-<style>
-  .navbar-brand{
-    color: #FDFDFD !important;
-    margin-left: 10px;
-  }
+<style></style>
 
-  .dropdown-menu{
-    border-radius: 0px;
-  }
-
-  .dropdown-menu li .dropdown-item:hover{
-    background-color: #FFF;
-    color: var(--bs-primary) !important;
-  }
-
-  .dropdown-menu li .dropdown-item{
-    color: #343434 !important;
-  }
-
-  /* Asegurar que el botón sea siempre visible */
-  .navbar-toggler {
-    display: block !important;
-    visibility: visible !important;
-  }
-</style>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <!-- Botón siempre visible - Combinar Bootstrap y Svelte -->
-    <button 
-      class="navbar-toggler" 
-      type="button" 
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-      on:click={toggleSidebar}
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <a class="navbar-brand" href="#">Mi Dashboard</a>
-    
-    <!-- Menú de usuario a la derecha -->
-    <div class="ms-auto dropdown">
-      <button class="btn btn-link nav-link dropdown-toggle text-white text-decoration-none" type="button" data-bs-toggle="dropdown">
-        <i class="fa fa-user me-2"></i>
-        {user.name}
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="#"><i class="fa fa-user me-2"></i>Mi Perfil</a></li>
-        <li><a class="dropdown-item" href="#"><i class="fa fa-cog me-2"></i>Configuración</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="/sign-out"><i class="fa fa-sign-out me-2"></i>Cerrar Sesión</a></li>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand px-3 border-bottom">
+  <button class="btn" id="sidebar-toggle" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse navbar">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a href="/" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+          <!-- Verificar si session y session.jwt están definidos -->
+          {#if session && session.image_url}
+            <img src="{session.image_url}" class="avatar img-fluid rounded" alt="">
+          {:else}
+            <img src="/img/profile.jpg" class="avatar img-fluid rounded" alt="">
+          {/if}
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item" href="/profile" on:click|preventDefault={() => {navigate('/profile')}}>
+            Mi Perfil
+          </a>
+          <a href="/" class="dropdown-item">Setting</a>
+          <a class="dropdown-item" on:click|preventDefault={signOut} href="/user/sign-out">Salir</a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>
